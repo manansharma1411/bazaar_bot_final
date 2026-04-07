@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: bazaar-bot
+    runtime: node
+    rootDir: files
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free

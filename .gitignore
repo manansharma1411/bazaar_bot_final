@@ -1,0 +1,3 @@
+files/node_modules/
+files/.env
+files/data/price/priceStore.json

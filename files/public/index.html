@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bazaar Bot — Market-Aware Negotiation Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js for price history graph -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- ─── Background decorative blobs ─── -->
+  <div class="bg-blob blob1"></div>
+  <div class="bg-blob blob2"></div>
+  <div class="bg-blob blob3"></div>
+
+  <!-- ─── Main Container ─── -->
+  <div class="container">
+
+    <!-- ─── Header ─── -->
+    <header class="header">
+      <div class="logo-wrap">
+        <!-- SVG logo replicating Bazaar Bot icon -->
+        <img src="logo.png" class="logo-img">
+        <div class="brand">
+          <h1 class="brand-name">BAZAAR BOT</h1>
+          <p class="brand-tagline">Market-Aware Negotiation Assistant</p>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="dot"></span>
+        <span>Live Market Data</span>
+      </div>
+    </header>
+
+    <!-- ─── Input Card ─── -->
+    <div class="card input-card">
+      <div class="card-label">🔍 Analyze a Product</div>
+
+      <div class="input-group">
+        <label for="product-input">Product Name</label>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="product-input"
+            placeholder="e.g. iPhone 13, Samsung AC, Levi's Jeans..."
+            autocomplete="off"
+          />
+          <span class="input-icon">🛍️</span>
+        </div>
+        <!-- Autocomplete dropdown -->
+        <div class="autocomplete-list" id="autocomplete-list"></div>
+      </div>
+
+      <div class="input-group">
+        <label for="price-input">Your Price / Quoted Price (₹)</label>
+        <div class="input-wrapper">
+          <input
+            type="number"
+            id="price-input"
+            placeholder="e.g. 55000"
+            min="1"
+          />
+          <span class="input-icon">₹</span>
+        </div>
+      </div>
+
+      <button class="analyze-btn" id="analyze-btn" onclick="analyzeProduct()">
+        <span class="btn-text">⚡ Analyze</span>
+        <span class="btn-shine"></span>
+      </button>
+    </div>
+
+    <!-- ─── Loading State ─── -->
+    <div class="loading-card" id="loading-card" style="display:none;">
+      <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring ring2"></div>
+      </div>
+      <div class="loading-texts">
+        <p class="loading-msg" id="loading-msg">Analyzing market trends...</p>
+      </div>
+    </div>
+
+    <!-- ─── Results Section ─── -->
+    <div id="results-section" style="display:none;">
+
+      <!-- Match Info Bar -->
+      <div class="match-bar" id="match-bar"></div>
+
+      <!-- Price Overview Cards -->
+      <div class="price-grid">
+        <div class="price-card market-price">
+          <div class="price-label">📊 Market Price</div>
+          <div class="price-value" id="market-price-val">—</div>
+          <div class="price-sub" id="market-range">Range: —</div>
+          <div class="price-source" id="live-price-source" style="display:none;"></div>
+        </div>
+        <div class="price-card user-price">
+          <div class="price-label">🏷️ Your Price</div>
+          <div class="price-value" id="user-price-val">—</div>
+          <div class="price-sub">Quoted / Paid</div>
+        </div>
+        <div class="price-card sweet-spot">
+          <div class="price-label">🎯 Sweet Spot</div>
+          <div class="price-value" id="sweet-spot-val">—</div>
+          <div class="price-sub">Best Negotiation Target</div>
+        </div>
+      </div>
+
+      <!-- Verdict Banner -->
+      <div class="verdict-card" id="verdict-card">
+        <div class="verdict-icon" id="verdict-icon"></div>
+        <div class="verdict-body">
+          <div class="verdict-title" id="verdict-title"></div>
+          <div class="verdict-action" id="verdict-action"></div>
+          <div class="verdict-tip" id="verdict-tip"></div>
+        </div>
+      </div>
+
+      <!-- Negotiation Steps -->
+      <div class="card steps-card">
+        <div class="card-label">🧠 Negotiation Strategy</div>
+        <ol class="steps-list" id="steps-list"></ol>
+      </div>
+
+      <!-- Script Card -->
+      <div class="card script-card">
+        <div class="card-label">💬 Negotiation Script</div>
+        <div class="script-text" id="script-text"></div>
+        <button class="copy-btn" onclick="copyScript()">📋 Copy Script</button>
+      </div>
+
+      <!-- Price History Chart -->
+      <div class="card chart-card">
+        <div class="card-label">📈 Price History (Last 12 Months)</div>
+        <div class="chart-wrapper">
+          <canvas id="priceChart"></canvas>
+        </div>
+        <div class="chart-legend">
+          <span class="legend-dot market"></span> Market Price &nbsp;&nbsp;
+          <span class="legend-dot user"></span> Your Price
+        </div>
+      </div>
+
+    </div>
+    <!-- /results-section -->
+
+    <!-- ─── Error Card ─── -->
+    <div class="error-card" id="error-card" style="display:none;">
+      <span class="error-icon">⚠️</span>
+      <span id="error-msg">Something went wrong. Please try again.</span>
+    </div>
+
+
+
+    <!-- ─── Footer ─── -->
+    <footer class="footer">
+      <p>Made with ❤️ for smarter bazaar bargaining · <strong>Bazaar Bot v1.0</strong></p>
+    </footer>
+
+  </div>
+  <!-- /container -->
+
+  <script src="script.js"></script>
+</body>
+</html>
